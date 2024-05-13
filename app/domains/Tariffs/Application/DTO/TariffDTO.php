@@ -26,7 +26,7 @@ class TariffDTO
 		$this->id = $tariff->getId();
 		$this->name = $tariff->getName();
 		$this->price = $tariff->getPrice()->getAmount();
-		$this->duration = $tariff->getDuration()->getDays();
+		$this->duration = $tariff->getDurationDays()->getDays();
 		$this->speed = $tariff->getSpeed()->getMbps();
 		$this->type = TariffTypeEnum::from($tariff->getType()->getType())->text();
 		$this->createdAt = $tariff->getCreatedAt()->format('H:i:s d.m.Y');

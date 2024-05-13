@@ -5,7 +5,7 @@ namespace app\domains\Tariffs\Domain\ValueObjects;
 /**
  * Срок действия
  */
-class Duration
+class DurationDays
 {
 	private int $days;
 

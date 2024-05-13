@@ -4,14 +4,8 @@ namespace app\domains\Tariffs\Infrastructure\Repositories;
 
 use PDO;
 use Exception;
-use DateTimeImmutable;
-use general\Config;
-use general\Database\Database;
+use app\domains\Tariffs\Domain\Factories\TariffFactory;
 use app\domains\Tariffs\Domain\Entities\Tariff;
-use app\domains\Tariffs\Domain\ValueObjects\Duration;
-use app\domains\Tariffs\Domain\ValueObjects\Money;
-use app\domains\Tariffs\Domain\ValueObjects\Speed;
-use app\domains\Tariffs\Domain\ValueObjects\TariffType;
 use app\domains\Tariffs\Domain\Repositories\TariffRepositoryInterface;
 
 /**
@@ -19,14 +13,12 @@ use app\domains\Tariffs\Domain\Repositories\TariffRepositoryInterface;
  */
 class SqlTariffRepository implements TariffRepositoryInterface
 {
-	private PDO $connection;
-
-	public function __construct() {
-		$config = Config::get('database');
-		$this->connection = (new Database($config))->getConnection();
+	public function __construct(private readonly PDO $connection) {
 	}
 
 	/**
+	 * Поиск тарифа по id
+	 *
 	 * @throws Exception
 	 */
 	public function findById(int $id): ?Tariff
@@ -37,14 +29,14 @@ class SqlTariffRepository implements TariffRepositoryInterface
 
 		$data = $stmt->fetch(PDO::FETCH_ASSOC);
 		if ($data) {
-			return new Tariff(
+			return TariffFactory::create(
 				$data['id'],
 				$data['name'],
-				(new Money($data['price'])),
-				(new Duration($data['duration_days'])),
-				(new Speed($data['speed'])),
-				(new TariffType($data['type'])),
-				(new DateTimeImmutable($data['created_at'])),
+				$data['price'],
+				$data['duration_days'],
+				$data['speed'],
+				$data['type'],
+				$data['created_at']
 			);
 		}
 
@@ -84,14 +76,14 @@ class SqlTariffRepository implements TariffRepositoryInterface
 		$tariffs = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 		return array_map(function ($data) {
-			return new Tariff(
+			return TariffFactory::create(
 				$data['id'],
 				$data['name'],
-				(new Money($data['price'])),
-				(new Duration($data['duration_days'])),
-				(new Speed($data['speed'])),
-				(new TariffType($data['type'])),
-				(new DateTimeImmutable($data['created_at'])),
+				$data['price'],
+				$data['duration_days'],
+				$data['speed'],
+				$data['type'],
+				$data['created_at']
 			);
 		}, $tariffs);
 	}

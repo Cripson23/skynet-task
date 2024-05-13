@@ -3,7 +3,7 @@
 namespace app\domains\Tariffs\Domain\Entities;
 
 use DateTimeImmutable;
-use app\domains\Tariffs\Domain\ValueObjects\Duration;
+use app\domains\Tariffs\Domain\ValueObjects\DurationDays;
 use app\domains\Tariffs\Domain\ValueObjects\Money;
 use app\domains\Tariffs\Domain\ValueObjects\Speed;
 use app\domains\Tariffs\Domain\ValueObjects\TariffType;
@@ -16,7 +16,7 @@ class Tariff
 	private int $id;
 	private string $name;
 	private Money $price;
-	private Duration $duration;
+	private DurationDays $duration;
 	private Speed $speed;
 	private TariffType $type;
 	private DateTimeImmutable $createdAt;
@@ -25,12 +25,12 @@ class Tariff
 	 * @param int $id
 	 * @param string $name
 	 * @param Money $price
-	 * @param Duration $duration
+	 * @param DurationDays $duration
 	 * @param Speed $speed
 	 * @param TariffType $type
 	 * @param DateTimeImmutable $createdAt
 	 */
-	public function __construct(int $id, string $name, Money $price, Duration $duration, Speed $speed, TariffType $type, DateTimeImmutable $createdAt)
+	public function __construct(int $id, string $name, Money $price, DurationDays $duration, Speed $speed, TariffType $type, DateTimeImmutable $createdAt)
 	{
 		$this->id = $id;
 		$this->name = $name;
@@ -66,9 +66,9 @@ class Tariff
 	}
 
 	/**
-	 * @return Duration
+	 * @return DurationDays
 	 */
-	public function getDuration(): Duration
+	public function getDurationDays(): DurationDays
 	{
 		return $this->duration;
 	}

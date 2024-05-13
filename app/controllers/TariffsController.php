@@ -2,19 +2,23 @@
 
 namespace app\controllers;
 
+use Exception;
 use general\Router;
 use general\View;
 use enums\HttpStatusCodes;
+use app\domains\Tariffs\Application\Factories\ServiceFactory;
 use app\domains\Tariffs\Application\Services\TariffService;
-use app\domains\Tariffs\Infrastructure\Repositories\SqlTariffRepository;
 
 class TariffsController extends BaseController
 {
     private readonly TariffService $tariffService;
 
+	/**
+	 * @throws Exception
+	 */
 	public function __construct()
 	{
-        $this->tariffService = new TariffService(new SqlTariffRepository());
+        $this->tariffService = ServiceFactory::createTariffService();
 		parent::__construct();
 	}
 

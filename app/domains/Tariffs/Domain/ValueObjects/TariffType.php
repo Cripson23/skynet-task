@@ -7,20 +7,20 @@ namespace app\domains\Tariffs\Domain\ValueObjects;
  */
 class TariffType
 {
-	private string $type;
+	private int $type;
 
 	/**
-	 * @param string $type
+	 * @param int $type
 	 */
-	public function __construct(string $type)
+	public function __construct(int $type)
 	{
 		$this->type = $type;
 	}
 
 	/**
-	 * @return string
+	 * @return int
 	 */
-	public function getType(): string
+	public function getType(): int
 	{
 		return $this->type;
 	}
