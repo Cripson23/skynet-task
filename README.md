@@ -8,7 +8,7 @@
 - Установить **docker**, **docker-compose**.
 - Склонировать репозиторий.
 ```
-git clone https://github.com/Cripson23/skynet-task.git
+git clone https://github.com/Cripson23/skynet-task.git && cd skynet-task
 ```
 - Задать права доступа для всего проекта:
     - В среде разработки:
