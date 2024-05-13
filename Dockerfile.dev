@@ -29,7 +29,8 @@ USER root
 # Set proper permissions based on environment
 RUN find /var/www -type d -exec chmod 775 {} \; \
         && find /var/www -type f -exec chmod 664 {} \; \
-        && chmod -R 775 /var/log
+        && chmod -R 775 /var/log \
+        && chmod +x /var/www/vendor/bin/phpunit
 
 # Expose port 9000
 EXPOSE 9000
