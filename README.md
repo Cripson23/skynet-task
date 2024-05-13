@@ -31,7 +31,7 @@ git clone https://github.com/Cripson23/skynet-task.git && cd skynet-task
 - Для тестов можно использовать дамп **dump.sql**, который находится в **корневой директории**.   
   Для этого необходимо прокинуть файл дампа в контейнер и выполнить импорт (пример):
 ```
-docker cp dump.sql skynet-mysql-1:/home/dump.sql
+docker cp dump.sql skynet-task-mysql-1:/home/dump.sql
 docker-compose -f docker-compose.dev.yml exec mysql bash
 mysql -h localhost -P 3306 -u admin -p skynet < ./home/dump.sql
 ```
